@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TapTap Send - Fast, Secure & Best Exchange Rates to Bangladesh</title>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #046A38;
+            --primary-dark: #024D26;
+            --accent: #10B981;
+            --dark: #1F2937;
+            --light: #F9FAFB;
+            --gray: #6B7280;
+            --border: #E5E7EB;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* Header / Navbar */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-area img {
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .logo-area span {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 15px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .btn-download-header {
+            background: var(--primary);
+            color: white;
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(4, 106, 56, 0.2);
+        }
+
+        .btn-download-header:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Hero / Cover Section */
+        .hero {
+            padding: 160px 5% 100px;
+            background: linear-gradient(135deg, #046A38 0%, #024D26 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+            position: relative;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .hero-content h1 {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+        }
+
+        .store-btn {
+            background: white;
+            color: var(--dark);
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .store-btn:hover {
+            background: #f1f5f9;
+            transform: translateY(-3px);
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            width: 420px;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        /* Section Commons */
+        section {
+            padding: 90px 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: var(--gray);
+            font-size: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Country Lists Section */
+        .countries-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .country-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            border: 1px solid var(--border);
+        }
+
+        .country-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .country-list {
+            max-height: 350px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        .country-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .country-item:hover {
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+
+        .country-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+        }
+
+        .country-info img {
+            width: 28px;
+            height: 20px;
+            object-fit: cover;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .badge-incentive {
+            background: #d1fae5;
+            color: #065f46;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* Services / Payout Methods */
+        .services-bg {
+            background: #ffffff;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 25px;
+        }
+
+        .service-box {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 30px 20px;
+            text-align: center;
+            border-radius: 16px;
+            transition: var(--transition);
+        }
+
+        .service-box:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(4,106,56,0.08);
+        }
+
+        .service-box i {
+            font-size: 38px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .service-box h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        /* How It Works / Steps */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+        }
+
+        .step-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .step-num {
+            width: 45px;
+            height: 45px;
+            background: var(--primary);
+            color: white;
+            font-weight: 800;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+        }
+
+        .step-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .step-card p {
+            font-size: 14px;
+            color: var(--gray);
+        }
+
+        /* Video Section */
+        .video-section {
+            background: #111827;
+            color: white;
+            text-align: center;
+        }
+
+        .video-section .section-title h2 { color: white; }
+        .video-section .section-title p { color: #9ca3af; }
+
+        .video-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            background: #1f2937;
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .video-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Testimonials Slider/Grid */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .review-card {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .reviewer-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 18px;
+        }
+
+        .reviewer-info h4 { font-size: 16px; font-weight: 700; }
+        .reviewer-info span { font-size: 13px; color: var(--gray); }
+
+        .stars { color: #F59E0B; font-size: 14px; margin-bottom: 10px; }
+
+        .review-card p {
+            font-size: 14px;
+            color: var(--gray);
+        }
+
+        /* Footer & Feedback Form */
+        footer {
+            background: #0f172a;
+            color: white;
+            padding: 80px 5% 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+
+        .footer-col h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-col p {
+            font-size: 14px;
+            color: #94a3b8;
+            margin-bottom: 15px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            width: 38px;
+            height: 38px;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            background: var(--primary);
+        }
+
+        /* Feedback Form inside Footer */
+        .feedback-form input, 
+        .feedback-form textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            color: white;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .feedback-form textarea {
+            height: 90px;
+            resize: none;
+        }
+
+        .feedback-form button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: var(--transition);
+        }
+
+        .feedback-form button:hover {
+            background: #058546;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #1e293b;
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        @media(max-width: 768px) {
+            .hero { flex-direction: column; text-align: center; padding-top: 130px; }
+            .hero-btns { justify-content: center; }
+            .hero-content h1 { font-size: 36px; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo-area">
+            <!-- হেডার লোগো src দিয়ে ছোট সাইজে সেট করা -->
+            <img src="logo_taptap.png" alt="TapTap Send Logo">
+            <span>TapTap Send</span>
+        </div>
+        <nav class="nav-links">
+            <a href="#countries">কান্ট্রিস</a>
+            <a href="#services">সার্ভিসসমূহ</a>
+            <a href="#howitworks">কার্যপ্রক্রিয়া</a>
+            <a href="#reviews">গ্রাহক রিভিউ</a>
+            <a href="#video">ভিডিও</a>
+        </nav>
+        <a href="Taptap_Send.apk" class="btn-download-header">ডাউনলোড অ্যাপ</a>
+    </header>
+
+    <!-- Hero / Cover Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>সবচেয়ে দ্রুত ও নিরাপদ উপায়ে বাংলাদেশে টাকা পাঠান</h1>
+            <p>সেরা এক্সচেঞ্জ রেট এবং ২.৫% সরকারি প্রণোদনা (Incentive) সহ মধ্যপ্রাচ্য ও ইউরোপ থেকে সরাসরি বিকাশ, নগদ বা ব্যাংক অ্যাকাউন্টে রেমিট্যান্স পাঠান।</p>
+            <div class="hero-btns">
+                <a href="appdownload.html" class="store-btn"><i class="fab fa-google-play"></i> Google Play</a>
+                <a href="appdownload.html" class="store-btn"><i class="fab fa-apple"></i> App Store</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="banar12.jpg" alt="App Mockup">
+        </div>
+    </section>
+
+    <!-- Service Countries Section (Middle East & Europe) -->
+    <section id="countries">
+        <div class="section-title">
+            <h2>যে যে দেশ থেকে সেবা প্রদান করা হয়</h2>
+            <p>মধ্যপ্রাচ্য ও ইউরোপের প্রধান দেশগুলো থেকে অত্যন্ত সুরক্ষিতভাবে বাংলাদেশে টাকা পাঠান। প্রতিটি লেনদেনে থাকছে ২.৫% ইনসেন্টিভ।</p>
+        </div>
+        
+        <div class="countries-container">
+            <!-- Middle East 15 Countries -->
+            <div class="country-card">
+                <h3><i class="fa-solid fa-earth-middle-east"></i> মধ্যপ্রাচ্য</h3>
+                <ul class="country-list">
+                    <li class="country-item"><div class="country-info"><img src="https://flagcdn.com/w40/sa.png" alt="SA"> সৌদি আরব (KSA)</div><span class="badge-incentive">+২.৫% ইনসেন্টিভ</span></li>
+                    <li class="country-item"><div class="country-info"><img src="https://flagcdn.com/w40/ae.png" alt="AE"> সংযুক্ত আরব আমিরাত</div><span class="badge-incentive">+২.৫% ইনসেন্টিভ</span></li>
+                    <li class="country-item"><div class="country-info"><img src="https://flagcdn.com/w40/qa.png" alt="QA"> কাতার</div><span class="badge-incentive">+২.৫% ইনসেন্টিভ</span></li>
+                    <li class="country-item"><div class="country-info"><img src="https://flagcdn.com/w40/kw.png" alt="KW"> কুয়েত</div><span class="badge-incentive">+২.৫% ইনসেন্টিভ</span></li>
+                    <li class="country-item"><div class="country-info"><img src="https://flagcdn.com/w40/om.png" alt="OM"> ওমান</div><span class="badge-incentive">+২.৫% ইনসেন্টিভ</span></li>
+                    <li class="country-item"><div class="country-info"><img src="https://flagcdn.com/w40/bh.png" alt="BH"> বাহরাইন</div><span class="badge-incentive">+২.৫% ইনসেন্টিভ</span></li>
+                    <li class="country-item"><div class="country-info"><img src="https://flagcdn.com/w40/jo.png" alt="JO"> জর্ডান</div><span class="badge-incentive">+২.৫% ইনসেন্টিভ</span></li>
+                    <li class="country-item"><div class="country-info"><img src="https://flagcdn.com/w40/lb.png" alt="LB"> লেবানন</div><span class="badge-incentive">+২.৫% ইনসেন্টিভ</span></li>
+                    <li class="country-item"><div class="country-info"><img src="https://flagcdn.com/w40/iq.png" alt="IQ"> ইরাক</div><span class="badge-incentive">+২.৫% ইনসেন্টিভ</span></li>
+                    <li class="country-item"><div class="country-info"><img src="https://flagcdn.com/w40/ye.png" alt="YE"> ইয়েমেন</div><span class="badge-incentive">+২.৫% ইনসেন্টিভ</span></li>
+                    <li class="country-item"><div class="country-info"><img src="https://flagcdn.com/w40/sy.png" alt="SY"> সিরিয়া</div><span class="badge-incentive">+২.৫% ইনসেন্টিভ</span></li>
+                    <li class="country-item"><div class="country-info"><img src="https://flagcdn.com/w40/ps.png" alt="PS"> ফিলিস্তিন</div><span class="badge-incentive">+২.৫% ইনসেন্টিভ</span></li>
+                    <li class="country-item"><div class="country-info"><img src="https://flagcdn.com/w40/eg.png" alt="EG"> মিশর</div><span class="badge-incentive">+২.৫% ইনসেন্টিভ</span></li>
+                    <li class="country-item"><div class="country-info"><img src="https://flagcdn.com/w40/tr.png" alt="TR"> তুরস্ক</div><span class="badge-incentive">+২.৫% ইনসেন্টিভ</span></li>
+                    <li class="country-item"><div class="country-info"><img src="https://flagcdn.com/w40/cy.png" alt="CY"> সাইপ্রাস</div><span class="badge-incentive">+২.৫% ইনসেন্টিভ</span></li>
+                </ul>
+            </div>
+
+            <!-- Europe 18 Countries -->
+            <div class="country-card">
+                <h3><i class="fa-solid fa-earth-europe"></i> ইউরোপ</h3>
+                <ul class="country-list">
+                    <li class="country-item"><div class="country-info"><img src="https://flagcdn.com/w40/gb.png" alt="GB"> যুক্তরাজ্য (UK)</div><span class="badge-incentive">+২.৫% ইনসেন্টিভ</span></li>
+                    <li class="country-item"><div class="country-info"><img src="https://flagcdn.com/w40/de.png" alt="DE"> জার্মানি</div><span class="badge-incentive">+২.৫% ইনসেন্টিভ</span></li>
+                    <li class="country-item"><div class="country-info"><img src="https://flagcdn.com/w40/fr.png" alt="FR"> ফ্রান্স</div><span class="badge-incentive">+২.৫% ইনসেন্টিভ</span></li>
+                    <li class="country-item"><div class="country-info"><img src="https://flagcdn.com/w40/it.png" alt="IT"> ইতালি</div><span class="badge-incentive">+২.৫% ইনসেন্টিভ</span></li>
+                    <li class="country-item"><div class="country-info"><img src="https://flagcdn.com/w40/es.png" alt="ES"> স্পেন</div><span class="badge-incentive">+২.৫% ইনসেন্টিভ</span></li>
+                    <li class="country-item"><div class="country-info"><img src="https://flagcdn.com/w40/nl.png" alt="NL"> নেদারল্যান্ডস</div><span class="badge-incentive">+২.৫% ইনসেন্টিভ</span></li>
+                    <li class="country-item"><div class="country-info"><img src="https://flagcdn.com/w40/se.png" alt="SE"> সুইডেন</div><span class="badge-incentive">+২.৫% ইনসেন্টিভ</span></li>
+                    <li class="country-item"><div class="country-info"><img src="https://flagcdn.com/w40/no.png" alt="NO"> নরওয়ে</div><span class="badge-incentive">+২.৫% ইনসেন্টিভ</span></li>
+                    <li class="country-item"><div class="country-info"><img src="https://flagcdn.com/w40/dk.png" alt="DK"> ডেনমার্ক</div><span class="badge-incentive">+২.৫% ইনসেন্টিভ</span></li>
+                    <li class="country-item"><div class="country-info"><img src="https://flagcdn.com/w40/fi.png" alt="FI"> ফিনল্যান্ড</div><span class="badge-incentive">+২.৫% ইনসেন্টিভ</span></li>
+                    <li class="country-item"><div class="country-info"><img src="https://flagcdn.com/w40/at.png" alt="AT"> অস্ট্রিয়া</div><span class="badge-incentive">+২.৫% ইনসেন্টিভ</span></li>
+                    <li class="country-item"><div class="country-info"><img src="https://flagcdn.com/w40/be.png" alt="BE"> বেলজিয়াম</div><span class="badge-incentive">+২.৫% ইনসেন্টিভ</span></li>
+                    <li class="country-item"><div class="country-info"><img src="https://flagcdn.com/w40/ch.png" alt="CH"> সুইজারল্যান্ড</div><span class="badge-incentive">+২.৫% ইনসেন্টিভ</span></li>
+                    <li class="country-item"><div class="country-info"><img src="https://flagcdn.com/w40/pt.png" alt="PT"> পর্তুগাল</div><span class="badge-incentive">+২.৫% ইনসেন্টিভ</span></li>
+                    <li class="country-item"><div class="country-info"><img src="https://flagcdn.com/w40/ie.png" alt="IE"> আয়ারল্যান্ড</div><span class="badge-incentive">+২.৫% ইনসেন্টিভ</span></li>
+                    <li class="country-item"><div class="country-info"><img src="https://flagcdn.com/w40/gr.png" alt="GR"> গ্রিস</div><span class="badge-incentive">+২.৫% ইনসেন্টিভ</span></li>
+                    <li class="country-item"><div class="country-info"><img src="https://flagcdn.com/w40/pl.png" alt="PL"> পোল্যান্ড</div><span class="badge-incentive">+২.৫% ইনসেন্টিভ</span></li>
+                    <li class="country-item"><div class="country-info"><img src="https://flagcdn.com/w40/ro.png" alt="RO"> রোমানিয়া</div><span class="badge-incentive">+২.৫% ইনসেন্টিভ</span></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services / Payout Methods -->
+    <section class="services-bg" id="services">
+        <div class="section-title">
+            <h2>আমাদের সার্ভিসসমূহ ও পেমেন্ট মাধ্যম</h2>
+            <p>বাংলাদেশে তাৎক্ষণিক টাকা পাঠানোর বহুমুখী এবং সহজ মাধ্যমসমূহ।</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-box">
+                <i class="fa-solid fa-building-columns"></i>
+                <h4>ব্যাংক ট্রান্সফার</h4>
+            </div>
+            <div class="service-box">
+                <i class="fa-solid fa-wallet"></i>
+                <h4>বিকাশ (bKash)</h4>
+            </div>
+            <div class="service-box">
+                <i class="fa-solid fa-mobile-screen-button"></i>
+                <h4>নগদ (Nagad)</h4>
+            </div>
+            <div class="service-box">
+                <i class="fa-solid fa-paper-plane"></i>
+                <h4>রকেট (Rocket)</h4>
+            </div>
+            <div class="service-box">
+                <i class="fa-solid fa-money-bill-transfer"></i>
+                <h4>উপায় (Upay)</h4>
+            </div>
+            <div class="service-box">
+                <i class="fa-solid fa-hand-holding-dollar"></i>
+                <h4>ক্যাশ পিকআপ</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Features / Steps -->
+    <section id="howitworks">
+        <div class="section-title">
+            <h2>সহজ কার্যপ্রক্রিয়া</h2>
+            <p>মাত্র কয়েকটি ক্লিকেই আপনার প্রয়োজনীয় কার্যক্রম সম্পন্ন করুন।</p>
+        </div>
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-num">১</div>
+                <h3>একাউন্ট রেজিস্ট্রেশন</h3>
+                <p>আপনার মোবাইল নম্বর এবং জিমেইল দিয়ে নিমেষেই একাউন্ট খুলে নিন।</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">২</div>
+                <h3>অ্যাড মানি</h3>
+                <p>ব্যাংক, কার্ড বা বিকাশ ব্যবহার করে খুব সহজেই আপনার ওয়ালেটে ব্যালেন্স অ্যাড করুন।</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">৩</div>
+                <h3>সেন্ড মানি</h3>
+                <p>প্রাপকের তথ্য দিয়ে দ্রুততম সময়ে নিরাপদ রেমিট্যান্স স্থানান্তর করুন।</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video-section" id="video">
+        <div class="section-title">
+            <h2>কীভাবে অ্যাপ ব্যবহার করবেন?</h2>
+            <p>আমাদের ভিডিও টিউটোরিয়াল দেখে খুব সহজেই অ্যাপটি পরিচালনা করা শিখুন।</p>
+        </div>
+        <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="TapTap Send Tutorial" allowfullscreen></iframe>
+        </div>
+    </section>
+
+    <!-- Customer Reviews Section (10 Reviews) -->
+    <section id="reviews">
+        <div class="section-title">
+            <h2>গ্রাহক রিভিউ</h2>
+            <p>আমাদের হাজারো সন্তুষ্ট গ্রাহকদের মূল্যবান মতামত।</p>
+        </div>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-img">RA</div>
+                    <div class="reviewer-info">
+                        <h4>রহিম আহমেদ</h4>
+                        <span>সৌদি আরব</span>
+                    </div>
+                </div>
+                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p>"খুব দ্রুত টাকা পৌঁছায় বিকাশ অ্যাকাউন্টে। রেটও অনেক ভালো দেয়। ধন্যবাদ TapTap Send-কে।"</p>
+            </div>
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-img">MI</div>
+                    <div class="reviewer-info">
+                        <h4>মেহেদী হাসান</h4>
+                        <span>সংযুক্ত আরব আমিরাত</span>
+                    </div>
+                </div>
+                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p>"নিরাপদ এবং নির্ভরযোগ্য অ্যাপ। কোনো ঝামেলা ছাড়াই প্রতি মাসে টাকা পাঠাই।"</p>
+            </div>
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-img">FK</div>
+                    <div class="reviewer-info">
+                        <h4>ফরহাদ খান</h4>
+                        <span>যুক্তরাজ্য (UK)</span>
+                    </div>
+                </div>
+                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p>"ইউরোপ থেকে বাংলাদেশে টাকা পাঠানোর সবচেয়ে সেরা মাধ্যম এটি। ইনসেন্টিভ পাওয়া যায় সময়মতো।"</p>
+            </div>
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-img">NS</div>
+                    <div class="reviewer-info">
+                        <h4>নাজমুল সাকিব</h4>
+                        <span>কাতার</span>
+                    </div>
+                </div>
+                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p>"অসাধারণ কাস্টমার সাপোর্ট এবং দারুণ ইন্টারফেস। অত্যন্ত সন্তুষ্ট।"</p>
+            </div>
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-img">JA</div>
+                    <div class="reviewer-info">
+                        <h4>জাকির হোসেন</h4>
+                        <span>কুয়েত</span>
+                    </div>
+                </div>
+                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></div>
+                <p>"খুব কম খরচে দ্রুত টাকা ট্রান্সফার করা যায়। সবার জন্যই রেকমেন্ড করব।"</p>
+            </div>
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-img">TA</div>
+                    <div class="reviewer-info">
+                        <h4>তানভীর আহমেদ</h4>
+                        <span>ইতালি</span>
+                    </div>
+                </div>
+                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p>"নিরাপত্তা ফিচারগুলো দারুণ, বিশেষ করে ওয়ান-ডিভাইস লগইন ও ভিপিএন ব্লকার চমৎকার কাজ করে।"</p>
+            </div>
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-img">SI</div>
+                    <div class="reviewer-info">
+                        <h4>শামীম ইকবাল</h4>
+                        <span>ওমান</span>
+                    </div>
+                </div>
+                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p>"ব্যাংক ডিপোজিট করতে কোনো ঝামেলা পোহাতে হয় না। OCR রসিদ ভ্যালিডেশন সিস্টেম দারুণ।"</p>
+            </div>
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-img">AR</div>
+                    <div class="reviewer-info">
+                        <h4>আরিফ রহমান</h4>
+                        <span>ফ্রান্স</span>
+                    </div>
+                </div>
+                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></div>
+                <p>"খুব কম সময়ে ক্যাশ পিকআপ এবং একাউন্টে টাকা চলে আসে। বিশ্বাসযোগ্য একটি অ্যাপ।"</p>
+            </div>
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-img">MR</div>
+                    <div class="reviewer-info">
+                        <h4>মামুনুর রশিদ</h4>
+                        <span>বাহরাইন</span>
+                    </div>
+                </div>
+                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p>"অন্যান্য এজেন্সির তুলনায় এখানে রেট অনেক ভালো পাওয়া যায়। অনেক ধন্যবাদ।"</p>
+            </div>
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-img">AN</div>
+                    <div class="reviewer-info">
+                        <h4>আনোয়ারুল হক</h4>
+                        <span>জার্মানি</span>
+                    </div>
+                </div>
+                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p>"খুব সুন্দর ডিজাইন এবং স্মুথ পারফরম্যান্স। আমার পছন্দের সেরা রেমিট্যান্স অ্যাপ।"</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer with Feedback & Company Details -->
+    <footer id="download">
+        <div class="footer-grid">
+            <!-- Company Info -->
+            <div class="footer-col">
+                <h3>TapTap Send</h3>
+                <p>বিশ্বের বিভিন্ন প্রান্ত থেকে বাংলাদেশে রেমিট্যান্স পাঠানোর সবচেয়ে নিরাপদ ও বিশ্বস্ত ডিজিটাল প্ল্যাটফর্ম। আমরা প্রদান করছি সর্বোচ্চ নিরাপত্তা ও আকর্ষণীয় রেট।</p>
+                <p><strong>ইমেইল:</strong> info@taptapsndbd.com</p>
+                <p><strong>হটলাইন / সাপোর্ট:</strong> +16302879193</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://wa.me/16302879193" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="#"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="footer-col">
+                <h3>দ্রুত লিংক</h3>
+                <p><a href="#countries">সার্ভিস কান্ট্রিস</a></p>
+                <p><a href="#services">পেমেন্ট মেথড</a></p>
+                <p><a href="#howitworks">কিভাবে ব্যবহার করবেন</a></p>
+                <p><a href="#reviews">গ্রাহক রিভিউ</a></p>
+            </div>
+
+            <!-- Feedback Form -->
+            <div class="footer-col">
+                <h3>আপনার মতামত দিন</h3>
+                <form class="feedback-form" onsubmit="event.preventDefault(); alert('ধন্যবাদ! আপনার মতামত সফলভাবে জমা হয়েছে।');">
+                    <input type="text" placeholder="আপনার নাম" required>
+                    <input type="email" placeholder="আপনার ইমেইল" required>
+                    <textarea placeholder="আপনার মতামত লিখুন..." required></textarea>
+                    <button type="submit">মতামত পাঠান</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 TapTap Send BD. All Rights Reserved. Designed with high professionalism.</p>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/12764772053" class="whatsapp-float" target="_blank">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+</body>
+</html>

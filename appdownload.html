@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TapTap Send: Money Transfer - Google Play Store</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1041/1041916.png">
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --play-green: #01875f;
+            --play-green-hover: #016849;
+            --text-dark: #202124;
+            --text-gray: #5f6368;
+            --border-color: #dadce0;
+            --bg-light: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', 'Google Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* Google Play Top Navbar */
+        .play-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 24px;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 100;
+        }
+
+        .play-logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .play-logo-area img {
+            width: 36px;
+            height: 36px;
+        }
+
+        .play-logo-area span {
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--text-gray);
+            letter-spacing: -0.2px;
+        }
+
+        .play-nav-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .play-nav-links a {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-gray);
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: 0.2s;
+        }
+
+        .play-nav-links a.active {
+            color: var(--play-green);
+            border-bottom: 3px solid var(--play-green);
+            border-radius: 0;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .search-icon, .help-icon {
+            font-size: 18px;
+            color: var(--text-gray);
+            cursor: pointer;
+        }
+
+        .profile-circle {
+            width: 34px;
+            height: 34px;
+            background: #e8f0fe;
+            color: #1a73e8;
+            font-weight: 700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        /* App Details Container */
+        .main-container {
+            max-width: 1060px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .app-header-grid {
+            display: flex;
+            gap: 32px;
+            align-items: flex-start;
+        }
+
+        .app-icon-large {
+            width: 160px;
+            height: 160px;
+            border-radius: 28px;
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border: 1px solid var(--border-color);
+        }
+
+        .app-meta {
+            flex: 1;
+        }
+
+        .app-meta h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+
+        .developer-name {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--play-green);
+            margin-bottom: 8px;
+            display: inline-block;
+        }
+
+        .ad-warning {
+            font-size: 12px;
+            color: var(--text-gray);
+            margin-bottom: 18px;
+        }
+
+        /* Play Stats Bar (Rating, Reviews, Downloads) */
+        .stats-bar {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 24px;
+            padding: 10px 0;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .stat-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: -15px;
+            top: 20%;
+            height: 60%;
+            width: 1px;
+            background: var(--border-color);
+        }
+
+        .stat-val {
+            font-size: 15px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .stat-sub {
+            font-size: 12px;
+            color: var(--text-gray);
+            margin-top: 2px;
+        }
+
+        /* Install / Download Actions */
+        .cta-actions {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .btn-install {
+            background-color: var(--play-green);
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 12px 36px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.2s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+        }
+
+        .btn-install:hover {
+            background-color: var(--play-green-hover);
+        }
+
+        .btn-share {
+            border: 1px solid var(--border-color);
+            background: white;
+            color: var(--play-green);
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .device-compat {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--text-gray);
+            margin-top: 15px;
+        }
+
+        .device-compat i {
+            color: var(--play-green);
+        }
+
+        /* App Screenshots Carousel */
+        .screenshots-section {
+            margin: 40px 0;
+        }
+
+        .screenshots-scroll {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            padding-bottom: 12px;
+            scrollbar-width: thin;
+        }
+
+        .screenshot-item {
+            width: 220px;
+            height: 390px;
+            border-radius: 16px;
+            object-fit: cover;
+            border: 1px solid var(--border-color);
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+        }
+
+        /* About Section */
+        .about-section {
+            margin: 40px 0;
+            border-top: 1px solid var(--border-color);
+            padding-top: 30px;
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .about-text {
+            color: var(--text-gray);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* Safety & Features Tags */
+        .tag-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .tag-pill {
+            background: #f1f3f4;
+            padding: 8px 14px;
+            border-radius: 16px;
+            font-size: 13px;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Footer */
+        .play-footer {
+            background: #f8f9fa;
+            border-top: 1px solid var(--border-color);
+            padding: 30px 24px;
+            margin-top: 60px;
+            color: var(--text-gray);
+            font-size: 12px;
+            text-align: center;
+        }
+
+        @media(max-width: 768px) {
+            .app-header-grid {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .stats-bar {
+                justify-content: center;
+            }
+            .cta-actions {
+                justify-content: center;
+                width: 100%;
+            }
+            .btn-install {
+                width: 100%;
+                justify-content: center;
+            }
+            .play-nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Google Play Header -->
+    <header class="play-header">
+        <div class="play-logo-area">
+            <svg viewBox="0 0 40 40" width="34" height="34">
+                <path fill="#EA4335" d="M19.7 19.3L4.4 3.7C4.1 4.3 4 5 4 5.7v28.6c0 .7.1 1.4.4 2l15.3-17z"/>
+                <path fill="#FBBC04" d="M25.3 13.8L19.7 19.3l5.6 5.5 6.3-3.6c1.8-1 1.8-2.8 0-3.8l-6.3-3.6z"/>
+                <path fill="#4285F4" d="M4.4 36.3c.7.9 1.8 1.4 3.1.7l17.8-10.2-5.6-5.5-15.3 15z"/>
+                <path fill="#34A853" d="M4.4 3.7l15.3 15.6 5.6-5.5L7.5 3.6C6.2 2.9 5.1 3.4 4.4 3.7z"/>
+            </svg>
+            <span>Google Play</span>
+        </div>
+        <nav class="play-nav-links">
+            <a href="#">Games</a>
+            <a href="#" class="active">Apps</a>
+            <a href="#">Movies</a>
+            <a href="#">Books</a>
+            <a href="#">Kids</a>
+        </nav>
+        <div class="header-actions">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <i class="fa-regular fa-circle-question help-icon"></i>
+            <div class="profile-circle">T</div>
+        </div>
+    </header>
+
+    <!-- Main Content App Details -->
+    <main class="main-container">
+        
+        <!-- App Title Header Section -->
+        <div class="app-header-grid">
+            <!-- App Large Icon -->
+            <img src="logo_taptap.png" alt="TapTap Send Icon" class="app-icon-large">
+            
+            <div class="app-meta">
+                <h1>TapTap Send: Money Transfer BD</h1>
+                <a href="#" class="developer-name">TapTap Agency Ltd. <i class="fa-solid fa-circle-check" style="font-size: 13px;"></i></a>
+                <div class="ad-warning">Contains ads · In-app purchases</div>
+
+                <!-- Stats Bar -->
+                <div class="stats-bar">
+                    <div class="stat-item">
+                        <div class="stat-val">4.8 <i class="fa-solid fa-star" style="font-size: 12px;"></i></div>
+                        <div class="stat-sub">12K reviews</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-val">50K+</div>
+                        <div class="stat-sub">Downloads</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-val">14 MB</div>
+                        <div class="stat-sub">Size</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-val"><i class="fa-solid fa-shield-halved" style="color: var(--play-green);"></i> 3+</div>
+                        <div class="stat-sub">Rated for 3+</div>
+                    </div>
+                </div>
+
+                <!-- Call to Action (Download APK) -->
+                <div class="cta-actions">
+                    <!-- সরাসরি আপনার অ্যাপের APK ফাইলের লিংক এখানে বসিয়ে দিন -->
+                    <a href="Taptap_Send.apk" download class="btn-install" id="installBtn">
+                        <i class="fa-brands fa-google-play"></i> Install / Download
+                    </a>
+                    <button class="btn-share" onclick="navigator.share ? navigator.share({title: 'TapTap Send', url: window.location.href}) : alert('লিংক কপি করা হয়েছে!')">
+                        <i class="fa-solid fa-share-nodes"></i> Share
+                    </button>
+                </div>
+
+                <div class="device-compat">
+                    <i class="fa-solid fa-mobile-screen"></i> This app is available for all of your Android devices
+                </div>
+            </div>
+        </div>
+
+        <!-- Screenshots Carousel -->
+        <div class="screenshots-section">
+            <div class="screenshots-scroll">
+                <img src="appss1.png" alt="Screen 1" class="screenshot-item">
+                <img src="appss2.png" alt="Screen 2" class="screenshot-item">
+                <img src="appss3.png" alt="Screen 3" class="screenshot-item">
+                <img src="appss4.png" alt="Screen 4" class="screenshot-item">
+            </div>
+        </div>
+
+        <!-- About this App -->
+        <div class="about-section">
+            <div class="section-heading">
+                <span>About this app</span>
+                <i class="fa-solid fa-arrow-right" style="color: var(--text-gray); font-size: 14px;"></i>
+            </div>
+            <p class="about-text">
+                TapTap Send হলো মধ্যপ্রাচ্য (সৌদি আরব, ইউএই, কাতার ইত্যাদি) ও ইউরোপ থেকে সরাসরি বাংলাদেশে যেকোনো ব্যাংক, বিকাশ, নগদ ও রকেটে রেমিট্যান্স পাঠানোর দ্রুততম ও সবচেয়ে নিরাপদ অ্যাপ। সরকারি ২.৫% প্রণোদনা এবং সেরা এক্সচেঞ্জ রেট উপভোগ করুন কোনো অতিরিক্ত চার্জ ছাড়াই।
+            </p>
+
+            <div class="tag-pills">
+                <div class="tag-pill"><i class="fa-solid fa-bolt" style="color: var(--play-green);"></i> Instant Transfer</div>
+                <div class="tag-pill"><i class="fa-solid fa-shield" style="color: var(--play-green);"></i> Bank-Grade Security</div>
+                <div class="tag-pill"><i class="fa-solid fa-percent" style="color: var(--play-green);"></i> 2.5% Gov Incentive</div>
+                <div class="tag-pill"><i class="fa-solid fa-hand-holding-dollar" style="color: var(--play-green);"></i> 0% Hidden Fees</div>
+            </div>
+
+            <!-- Data Safety Section (Google Play Style) -->
+            <div class="section-heading" style="margin-top: 30px;">
+                <span>Data safety</span>
+            </div>
+            <p class="about-text">
+                Safety starts with understanding how developers collect and share your data. This app encrypts data in transit using 256-bit SSL encryption. Single device login and anti-VPN protection are enforced.
+            </p>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="play-footer">
+        <p>Google Play and the Google Play logo are trademarks of Google LLC. &copy; 2026 TapTap Send BD.</p>
+    </footer>
+
+    <script>
+        // বাটনে ক্লিক করলে ডাউনলোড শুরু হওয়ার সাথে ভিজ্যুয়াল ফিডব্যাক
+        const installBtn = document.getElementById('installBtn');
+        installBtn.addEventListener('click', () => {
+            installBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Downloading...';
+            setTimeout(() => {
+                installBtn.innerHTML = '<i class="fa-solid fa-check"></i> Downloaded';
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
